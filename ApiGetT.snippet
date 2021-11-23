@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>P.HttpClient CodeSnippet</Title>
+      <Author>P</Author>
+      <Description>P</Description>
+      <Shortcut>apigett</Shortcut>
+    </Header>
+    <Snippet>
+      <!--<References>
+        <Reference>
+          <Assembly>P.HttpClient.dll</Assembly>
+        </Reference>
+      </References>-->
+      <Imports>
+        <Import>
+          <Namespace>P.HttpClient</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="CSharp">
+        <![CDATA[
+using(var api=new ApiClient())
+{
+  api.Get<T>(
+    urlPath:"",
+    success:(t)=>
+    {
+      //ok
+    },
+    error:(err)=>
+    {
+    }
+  );
+}
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
