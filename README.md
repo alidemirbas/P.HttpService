@@ -2,7 +2,7 @@ Do you like AJAX syntax?
 What about to do something like that in C# ?
 
 ```csharp
-using (var api = new ApiClient(this.ApiAccessToken))
+using (var api = new ApiClient(apiAccessToken))
 {
     api.Post(
       urlPath: "/authentication/signin",
