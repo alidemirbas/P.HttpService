@@ -62,7 +62,7 @@ namespace P.HttpClient
         }
 
         #region tokenli
-        public virtual void Get<T>(string urlPath, Action<T, string> success, Action<HttpStatusCode, Exception> httpError)
+        public virtual void Get<T>(string urlPath, Action<T, string> success, Action<HttpStatusCode, Exception> error)
         {
             var response = HttpClient.GetAsync(urlPath).Result;
             var responseData = response.Content.ReadAsStringAsync().Result;
@@ -76,10 +76,10 @@ namespace P.HttpClient
                 OnSuccess(success, responseData, Token);
             }
             else
-                OnError(httpError, response.StatusCode, responseData);
+                OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Get(string urlPath, Action<string> success, Action<HttpStatusCode, Exception> httpError)
+        public virtual void Get(string urlPath, Action<string> success, Action<HttpStatusCode, Exception> error)
         {
             var response = HttpClient.GetAsync(urlPath).Result;
             var responseData = response.Content.ReadAsStringAsync().Result;
@@ -92,10 +92,10 @@ namespace P.HttpClient
                 success(Token);
             }
             else
-                OnError(httpError, response.StatusCode, responseData);
+                OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Post<T>(string urlPath, object data, Action<T, string> success, Action<HttpStatusCode, Exception> httpError)
+        public virtual void Post<T>(string urlPath, object data, Action<T, string> success, Action<HttpStatusCode, Exception> error)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, JSON);//note JSON bu 3. prm Content-Type header'ini ayarliyor https://stackoverflow.com/a/10679340
@@ -111,10 +111,10 @@ namespace P.HttpClient
                 OnSuccess(success, responseData, Token);
             }
             else
-                OnError(httpError, response.StatusCode, responseData);
+                OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Post(string urlPath, object data, Action<string> success, Action<HttpStatusCode, Exception> httpError)
+        public virtual void Post(string urlPath, object data, Action<string> success, Action<HttpStatusCode, Exception> error)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
@@ -131,7 +131,7 @@ namespace P.HttpClient
                 success(Token);
             }
             else
-                OnError(httpError, response.StatusCode, responseData);
+                OnError(error, response.StatusCode, responseData);
         }
 
         #endregion
@@ -139,9 +139,9 @@ namespace P.HttpClient
         #region tokensiz
 
         //her seferinde token'i disariya vermek istemediginde (mesela ic ice success'lerde)
-        public void Get<T>(string urlPath, Action<T/*,string*/> success, Action<HttpStatusCode, Exception> httpError)
+        public void Get<T>(string urlPath, Action<T/*,string*/> success, Action<HttpStatusCode, Exception> error)
         {
-            this.Get<T>(urlPath, (t, newToken) => { success(t); }, httpError);
+            this.Get<T>(urlPath, (t, newToken) => { success(t); }, error);
         }
 
         public void Get<T>(string urlPath, Action<T/*,string*/> success)
@@ -149,9 +149,9 @@ namespace P.HttpClient
             this.Get<T>(urlPath, (t, newToken) => { success(t); });
         }
 
-        public void Get(string urlPath, Action success, Action<HttpStatusCode, Exception> httpError)
+        public void Get(string urlPath, Action success, Action<HttpStatusCode, Exception> error)
         {
-            this.Get(urlPath, (newToken) => { success(); }, httpError);
+            this.Get(urlPath, (newToken) => { success(); }, error);
         }
 
         public void Get(string urlPath, Action success)
@@ -159,9 +159,9 @@ namespace P.HttpClient
             this.Get(urlPath, (newToken) => { success(); });
         }
 
-        public void Post<T>(string urlPath, object data, Action<T> success, Action<HttpStatusCode, Exception> httpError)
+        public void Post<T>(string urlPath, object data, Action<T> success, Action<HttpStatusCode, Exception> error)
         {
-            this.Post<T>(urlPath, data, (t, newToken) => { success(t); }, httpError);
+            this.Post<T>(urlPath, data, (t, newToken) => { success(t); }, error);
         }
 
         public void Post<T>(string urlPath, object data, Action<T> success)
@@ -169,9 +169,9 @@ namespace P.HttpClient
             this.Post<T>(urlPath, data, (t, newToken) => { success(t); });
         }
 
-        public void Post(string urlPath, object data, Action success, Action<HttpStatusCode, Exception> httpError)
+        public void Post(string urlPath, object data, Action success, Action<HttpStatusCode, Exception> error)
         {
-            this.Post(urlPath, data, (newToken) => { success(); }, httpError);
+            this.Post(urlPath, data, (newToken) => { success(); }, error);
         }
 
         public void Post(string urlPath, object data, Action success)
@@ -232,14 +232,14 @@ namespace P.HttpClient
             successDelegate(obj, token);
         }
 
-        private void OnError(Action<HttpStatusCode, Exception> httpError, HttpStatusCode statusCode, string exceptionJson)
+        private void OnError(Action<HttpStatusCode, Exception> error, HttpStatusCode statusCode, string exceptionJson)
         {
             Exception exp = null;
 
             if (!string.IsNullOrEmpty(exceptionJson))
                 exp = Newtonsoft.Json.JsonConvert.DeserializeObject<Exception>(exceptionJson);
 
-            httpError(statusCode, exp);
+            error(statusCode, exp);
         }
     }
 }
