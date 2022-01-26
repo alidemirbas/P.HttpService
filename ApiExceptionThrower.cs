@@ -5,9 +5,9 @@ namespace P.HttpClient
 {
     public class ApiExceptionThrower
     {
-        public static void WrapAndThrow(HttpStatusCode httpStatusCode, Exception innerException)
+        public static void WrapAndThrow(HttpStatusCode httpStatusCode, RemoteException remoteException)
         {
-            var apiExp = new ApiException(httpStatusCode, innerException);
+            var apiExp = new ApiException(httpStatusCode, remoteException);
             throw apiExp;
         }
     }

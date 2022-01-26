@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -62,7 +63,7 @@ namespace P.HttpClient
         }
 
         #region tokenli
-        public virtual void Get<T>(string urlPath, Action<T, string> success, Action<HttpStatusCode, Exception> error)
+        public virtual void Get<T>(string urlPath, Action<T, string> success, Action<HttpStatusCode, RemoteException> error)
         {
             var response = HttpClient.GetAsync(urlPath).Result;
             var responseData = response.Content.ReadAsStringAsync().Result;
@@ -79,7 +80,7 @@ namespace P.HttpClient
                 OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Get(string urlPath, Action<string> success, Action<HttpStatusCode, Exception> error)
+        public virtual void Get(string urlPath, Action<string> success, Action<HttpStatusCode, RemoteException> error)
         {
             var response = HttpClient.GetAsync(urlPath).Result;
             var responseData = response.Content.ReadAsStringAsync().Result;
@@ -95,7 +96,7 @@ namespace P.HttpClient
                 OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Post<T>(string urlPath, object data, Action<T, string> success, Action<HttpStatusCode, Exception> error)
+        public virtual void Post<T>(string urlPath, object data, Action<T, string> success, Action<HttpStatusCode, RemoteException> error)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, JSON);//note JSON bu 3. prm Content-Type header'ini ayarliyor https://stackoverflow.com/a/10679340
@@ -114,7 +115,7 @@ namespace P.HttpClient
                 OnError(error, response.StatusCode, responseData);
         }
 
-        public virtual void Post(string urlPath, object data, Action<string> success, Action<HttpStatusCode, Exception> error)
+        public virtual void Post(string urlPath, object data, Action<string> success, Action<HttpStatusCode, RemoteException> error)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             HttpContent httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
@@ -139,7 +140,7 @@ namespace P.HttpClient
         #region tokensiz
 
         //her seferinde token'i disariya vermek istemediginde (mesela ic ice success'lerde)
-        public void Get<T>(string urlPath, Action<T/*,string*/> success, Action<HttpStatusCode, Exception> error)
+        public void Get<T>(string urlPath, Action<T/*,string*/> success, Action<HttpStatusCode, RemoteException> error)
         {
             this.Get<T>(urlPath, (t, newToken) => { success(t); }, error);
         }
@@ -149,7 +150,7 @@ namespace P.HttpClient
             this.Get<T>(urlPath, (t, newToken) => { success(t); });
         }
 
-        public void Get(string urlPath, Action success, Action<HttpStatusCode, Exception> error)
+        public void Get(string urlPath, Action success, Action<HttpStatusCode, RemoteException> error)
         {
             this.Get(urlPath, (newToken) => { success(); }, error);
         }
@@ -159,7 +160,7 @@ namespace P.HttpClient
             this.Get(urlPath, (newToken) => { success(); });
         }
 
-        public void Post<T>(string urlPath, object data, Action<T> success, Action<HttpStatusCode, Exception> error)
+        public void Post<T>(string urlPath, object data, Action<T> success, Action<HttpStatusCode, RemoteException> error)
         {
             this.Post<T>(urlPath, data, (t, newToken) => { success(t); }, error);
         }
@@ -169,7 +170,7 @@ namespace P.HttpClient
             this.Post<T>(urlPath, data, (t, newToken) => { success(t); });
         }
 
-        public void Post(string urlPath, object data, Action success, Action<HttpStatusCode, Exception> error)
+        public void Post(string urlPath, object data, Action success, Action<HttpStatusCode, RemoteException> error)
         {
             this.Post(urlPath, data, (newToken) => { success(); }, error);
         }
@@ -227,17 +228,17 @@ namespace P.HttpClient
             T obj = default(T);
 
             if (!string.IsNullOrEmpty(responseData))
-                obj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseData);
+                obj = JsonConvert.DeserializeObject<T>(responseData);
 
             successDelegate(obj, token);
         }
 
-        private void OnError(Action<HttpStatusCode, Exception> error, HttpStatusCode statusCode, string exceptionJson)
+        private void OnError(Action<HttpStatusCode, RemoteException> error, HttpStatusCode statusCode, string exceptionJson)
         {
-            Exception exp = null;
+            RemoteException exp = null;
 
             if (!string.IsNullOrEmpty(exceptionJson))
-                exp = Newtonsoft.Json.JsonConvert.DeserializeObject<Exception>(exceptionJson);
+                exp = JsonConvert.DeserializeObject<RemoteException>(exceptionJson);
 
             error(statusCode, exp);
         }
