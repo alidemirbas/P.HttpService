@@ -39,7 +39,7 @@ public class Sample
     }
 ```
 
-But I'm sure you wanna do it via "tab tab" 😊 so don't forget to check out code snippets in the project.
+But I'm sure you wanna do it via "tab tab" 😊 so don't forget to import code snippets in the project.
 https://github.com/alidemirbas/P.PHttpClient/blob/master/ApiPost.snippet
 
 It's that much easy 😏
