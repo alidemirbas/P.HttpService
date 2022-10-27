@@ -2,7 +2,9 @@ Do you like AJAX syntax?
 What about to do something like that in C# ?
 
 ```csharp
-services.AddHttpClient<IApiClient,ApiClient,ApiClientConfiguration>()
+services.AddHttpClient<IApiClient, ApiClient, ApiClientConfiguration>(configuration);
+
+...
 
 public class Sample
     {
