@@ -2,30 +2,30 @@
 <CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>P.HttpClient CodeSnippet</Title>
+      <Title>P.PHttpClient CodeSnippet</Title>
       <Author>P</Author>
       <Description>P</Description>
-      <Shortcut>apipost</Shortcut>
+      <Shortcut>apipostt</Shortcut>
     </Header>
     <Snippet>
       <!--<References>
         <Reference>
-          <Assembly>P.HttpClient.dll</Assembly>
+          <Assembly>P.PHttpClient.dll</Assembly>
         </Reference>
       </References>-->
       <Imports>
         <Import>
-          <Namespace>P.HttpClient</Namespace>
+          <Namespace>P.PHttpClient</Namespace>
         </Import>
       </Imports>
       <Code Language="CSharp">
         <![CDATA[
 using(var api=new ApiClient())
 {
-  api.Post(
+  api.Post<T>(
     urlPath:"",
     data:new{},
-    success:()=>
+    success:(t)=>
     {
       //ok
     },

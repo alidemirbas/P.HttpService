@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace P.HttpClient
+namespace P.PHttpClient
 {
     //note app life boyunca tek bir static httpclient'i reuse etmek daha iyi kaynak bakimindan diyorlar
     //https://stackoverflow.com/questions/37928543/httpclient-single-instance-with-different-authentication-headers

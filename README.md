@@ -19,6 +19,6 @@ using (var api = new ApiClient(apiAccessToken))
 ```
 
 But I'm sure you wanna do it via "tab tab" 😊 so don't forget to check out code snippets in the project.
-https://github.com/alidemirbas/P.HttpClient/blob/master/ApiPost.snippet
+https://github.com/alidemirbas/P.PHttpClient/blob/master/ApiPost.snippet
 
 It's that much easy 😏

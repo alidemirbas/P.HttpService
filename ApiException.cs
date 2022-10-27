@@ -3,7 +3,7 @@ using System;
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace P.HttpClient
+namespace P.PHttpClient
 {
     public class ApiException : Exception
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace P.HttpClient
+namespace P.PHttpClient
 {
     public class ApiExceptionThrower
     {
