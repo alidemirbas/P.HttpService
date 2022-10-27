@@ -6,7 +6,13 @@ using System.Text;
 
 namespace P.PHttpClient.TypedHttpClients.Base
 {
-    public abstract class ApiHttpClient : ApiHttpClientHelper, IApiHttpClientGet, IApiHttpClientPost, IApiHttpClientPut, IApiHttpClientDelete
+    public abstract class ApiHttpClient :
+        ApiHttpClientHelper,
+        IApiHttpClientGet,
+        IApiHttpClientPost,
+        IApiHttpClientPut,
+        IApiHttpClientDelete,
+        IDisposable
     {
         public const string AuthorizationHeaderKey = "Authorization";
         public const string JSON = "application/json";
@@ -108,7 +114,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #endregion
 
         #region Post
-        public virtual async Task PostAsync(string urlPath, object model, Action success = null, Action<ApiException> error = null)
+        public virtual async Task PostAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
         {
             HttpContent? httpContent = default;
 
@@ -120,7 +126,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response, success, error);
         }
 
-        public virtual async Task PostAsync<T>(string urlPath, object model, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task PostAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
         {
             HttpContent? httpContent = default;
 
@@ -132,7 +138,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response, success, error);
         }
 
-        public async Task PostAsync(string urlPath, object model)
+        public async Task PostAsync(string urlPath, object data)
         {
             HttpContent? httpContent = default;
 
@@ -144,7 +150,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response);
         }
 
-        public async Task<T> PostAsync<T>(string urlPath, object model)
+        public async Task<T> PostAsync<T>(string urlPath, object data)
         {
             HttpContent? httpContent = default;
 
@@ -158,7 +164,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #endregion
 
         #region Put
-        public virtual async Task PutAsync(string urlPath, object model, Action success = null, Action<ApiException> error = null)
+        public virtual async Task PutAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
         {
             HttpContent? httpContent = default;
 
@@ -170,7 +176,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response, success, error);
         }
 
-        public virtual async Task PutAsync<T>(string urlPath, object model, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task PutAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
         {
             HttpContent? httpContent = default;
 
@@ -183,7 +189,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         }
 
-        public async Task PutAsync(string urlPath, object model)
+        public async Task PutAsync(string urlPath, object data)
         {
             HttpContent? httpContent = default;
 
@@ -195,7 +201,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response);
         }
 
-        public async Task<T> PutAsync<T>(string urlPath, object model)
+        public async Task<T> PutAsync<T>(string urlPath, object data)
         {
             HttpContent? httpContent = default;
 
@@ -208,6 +214,9 @@ namespace P.PHttpClient.TypedHttpClients.Base
         }
         #endregion
 
-
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
     }
 }

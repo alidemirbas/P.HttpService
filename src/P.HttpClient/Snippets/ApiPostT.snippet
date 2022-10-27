@@ -5,7 +5,7 @@
       <Title>P.PHttpClient CodeSnippet</Title>
       <Author>P</Author>
       <Description>P</Description>
-      <Shortcut>apipost</Shortcut>
+      <Shortcut>apipostt</Shortcut>
     </Header>
     <Snippet>
       <!--<References>
@@ -15,25 +15,22 @@
       </References>-->
       <Imports>
         <Import>
-          <Namespace>P.PHttpClient</Namespace>
+			<Namespace>P.PHttpClient.TypedHttpClients.Concrete</Namespace>
         </Import>
       </Imports>
       <Code Language="CSharp">
         <![CDATA[
-using(var api=new ApiClient())
-{
-  api.Post(
+await _api.PostAsync<T>(
     urlPath:"",
     data:new{},
-    success:()=>
+    success:(t)=>
     {
-      //ok
+    //ok
     },
-    error:(httpStatusCode, httpError)=>
+    error:(apiExceptions)=>
     {
     }
-  );
-}
+);
         ]]>
       </Code>
     </Snippet>

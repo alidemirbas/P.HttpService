@@ -2,63 +2,30 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using P.PHttpClient.TypedHttpClients.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace P.HttpClient
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddHttpClients(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddHttpClient<TClient, TImplementation, TApiHttpClientConfiguration>(this IServiceCollection services, IConfiguration configuration)
+            where TApiHttpClientConfiguration : ApiHttpClientConfiguration
+            where TClient : class
+            where TImplementation : class, TClient
         {
-            var assembly = services.GetType().Assembly;
-            var optionsBaseType = typeof(IOptions<>);
-            var clientBaseType = typeof(ApiHttpClient);
-            var clientTypes= assembly.GetTypes().Where(x => clientBaseType.IsAssignableFrom(x) && !x.IsAbstract && !x.IsInterface);
-            var configurationBaseType = typeof(ApiHttpClientConfiguration);
+            var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration);
 
-            foreach (var clientType in clientTypes)
+            services.AddHttpClient<TClient, TImplementation>(client =>
             {
-                clientType.GetConstructors().SelectMany(x=>x.GetParameters()).Where(x=>)
-            }
-
-
-
-
-
-
-
-
-
-            var configurationTypes = assembly.GetTypes().Where(x => configurationBaseType.IsAssignableFrom(x) && !x.IsAbstract && !x.IsInterface);
-            foreach (var configurationType in configurationTypes)
-            {
-
-            }
-
-            var fileAccessApiClientConfiguration = RegisterClientConfiguration<FileAccessApiClientConfiguration>(services, configuration);
-            var plmApiClientConfiguration = RegisterClientConfiguration<PLMApiClientConfiguration>(services, configuration);
-
-            services.AddHttpClient<IPLMApiClient, PLMApiClient>(client =>
-            {
-                client.BaseAddress = new System.Uri(plmApiClientConfiguration.BaseAddress);
-            });
-
-            services.AddHttpClient<IFileAccessApiClient, FileAccessApiClient>(client =>
-            {
-                client.BaseAddress = new System.Uri(fileAccessApiClientConfiguration.BaseAddress);
+                client.BaseAddress = new Uri(clientConfiguration.BaseAddress);
             });
 
             return services;
         }
 
-        private static  RegisterClientConfiguration(IServiceCollection services, IConfiguration configuration,Type configurationType)
+        private static T RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration,string httpClientConfigurationsSectionName= "HttpClientConfigurations")
+            where T : ApiHttpClientConfiguration
         {
-            var httpClientConfigurationsName = "HttpClientConfigurations";
-            var configSection = $"{httpClientConfigurationsName}:{typeof(T).Name}";
+            var configSection = $"{httpClientConfigurationsSectionName}:{typeof(T).Name}";
 
             services.Configure<T>(configuration.GetSection(configSection));
 

@@ -15,24 +15,21 @@
       </References>-->
       <Imports>
         <Import>
-          <Namespace>P.PHttpClient</Namespace>
+          <Namespace>P.PHttpClient.TypedHttpClients.Concrete</Namespace>
         </Import>
       </Imports>
       <Code Language="CSharp">
         <![CDATA[
-using(var api=new ApiClient())
-{
-  api.Get(
+await _api.GetAsync(
     urlPath:"",
     success:()=>
     {
-      //ok
+    //ok
     },
-    error:(httpStatusCode, httpError)=>
+    error:(apiException)=>
     {
     }
-  );
-}
+);
         ]]>
       </Code>
     </Snippet>
