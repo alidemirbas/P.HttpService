@@ -1,5 +1,8 @@
-﻿using P.HttpClient.TypedHttpClients.Base;
+﻿using Newtonsoft.Json;
+using P.HttpClient.TypedHttpClients.Base;
 using P.HttpClient.Utility;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace P.PHttpClient.TypedHttpClients.Base
 {
@@ -35,7 +38,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             }
         }
 
-        public ApiHttpClient(System.Net.Http.HttpClient client, ApiHttpClientConfiguration configuration = null)
+        public ApiHttpClient(System.Net.Http.HttpClient client, ApiHttpClientConfiguration clientConfiguration = null)
         {
             _client = client;
 
@@ -114,8 +117,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PostAsync(urlPath, httpContent);
 
@@ -126,8 +129,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PostAsync(urlPath, httpContent);
 
@@ -138,8 +141,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PostAsync(urlPath, httpContent);
 
@@ -150,8 +153,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PostAsync(urlPath, httpContent);
 
@@ -164,8 +167,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PutAsync(urlPath, httpContent);
 
@@ -176,8 +179,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PutAsync(urlPath, httpContent);
 
@@ -189,8 +192,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PutAsync(urlPath, httpContent);
 
@@ -201,8 +204,8 @@ namespace P.PHttpClient.TypedHttpClients.Base
         {
             HttpContent? httpContent = default;
 
-            if (model != null)
-                httpContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, JSON);
+            if (data != null)
+                httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
 
             var response = await _client.PutAsync(urlPath, httpContent);
 
