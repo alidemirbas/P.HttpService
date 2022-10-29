@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using P.HttpClient.TypedHttpClients.Base;
+﻿using P.HttpClient.TypedHttpClients.Base;
 using P.HttpClient.Utility;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace P.PHttpClient.TypedHttpClients.Base
 {
@@ -38,14 +35,13 @@ namespace P.PHttpClient.TypedHttpClients.Base
             }
         }
 
-        public ApiHttpClient(System.Net.Http.HttpClient client, STSClientConfiguration configuration = null)
+        public ApiHttpClient(System.Net.Http.HttpClient client, ApiHttpClientConfiguration configuration = null)
         {
             _client = client;
+
+            _client.BaseAddress = new Uri(clientConfiguration.BaseAddress);
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JSON));
-
-            if (configuration != null)
-                _client.DefaultRequestHeaders.Add("api-key", configuration.ApiKey);
         }
 
         public virtual void SetToken(string token)

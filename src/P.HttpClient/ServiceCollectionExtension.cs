@@ -14,10 +14,7 @@ namespace P.HttpClient
         {
             var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration);
 
-            services.AddHttpClient<TClient, TImplementation>(client =>
-            {
-                client.BaseAddress = new Uri(clientConfiguration.BaseAddress);
-            });
+            services.AddHttpClient<TClient, TImplementation>();
 
             return services;
         }
