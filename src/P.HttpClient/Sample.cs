@@ -30,6 +30,7 @@ namespace P.HttpClient
             _api = api;
         }
 
+        /*
         public async Task Foo()
         {
 
@@ -45,11 +46,10 @@ namespace P.HttpClient
                 }
             );
 
-            /*
-            OR classic
-             */
+            //OR classic
 
             var t = await _api.PostAsync<T>("", new { });
         }
+        */
     }
 }
