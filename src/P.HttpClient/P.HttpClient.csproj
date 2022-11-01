@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Title>P.HttpClient</Title>
     <RepositoryUrl>https://github.com/alidemirbas/P.HttpClient</RepositoryUrl>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,13 @@
 
   <ItemGroup>
     <Folder Include="Snippets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
