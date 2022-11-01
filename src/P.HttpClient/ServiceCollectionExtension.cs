@@ -7,19 +7,19 @@ namespace P.HttpClient
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddHttpClient<TClient, TImplementation, TApiHttpClientConfiguration>(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddHttpClient<TClient, TImplementation, TApiHttpClientConfiguration>(this IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName = "HttpClientConfigurations")
             where TApiHttpClientConfiguration : ApiHttpClientConfiguration
             where TClient : class
             where TImplementation : class, TClient
         {
-            var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration);
+            var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration, httpClientConfigurationsSectionName);
 
             services.AddHttpClient<TClient, TImplementation>();
 
             return services;
         }
 
-        private static T RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration,string httpClientConfigurationsSectionName= "HttpClientConfigurations")
+        private static T RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName)
             where T : ApiHttpClientConfiguration
         {
             var configSection = $"{httpClientConfigurationsSectionName}:{typeof(T).Name}";
