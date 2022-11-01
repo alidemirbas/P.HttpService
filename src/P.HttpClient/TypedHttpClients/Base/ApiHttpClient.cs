@@ -38,7 +38,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             }
         }
 
-        public ApiHttpClient(System.Net.Http.HttpClient client, ApiHttpClientConfiguration clientConfiguration = null)
+        public ApiHttpClient(System.Net.Http.HttpClient client, ApiHttpClientConfiguration clientConfiguration)
         {
             _client = client;
 
@@ -115,7 +115,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #region Post
         public virtual async Task PostAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -127,7 +127,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public virtual async Task PostAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -139,7 +139,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public async Task PostAsync(string urlPath, object data)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -151,7 +151,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public async Task<T> PostAsync<T>(string urlPath, object data)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -165,7 +165,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #region Put
         public virtual async Task PutAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -177,7 +177,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public virtual async Task PutAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -190,7 +190,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public async Task PutAsync(string urlPath, object data)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);
@@ -202,7 +202,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
 
         public async Task<T> PutAsync<T>(string urlPath, object data)
         {
-            HttpContent? httpContent = default;
+            HttpContent httpContent = default;
 
             if (data != null)
                 httpContent = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, JSON);

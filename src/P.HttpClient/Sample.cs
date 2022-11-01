@@ -23,9 +23,9 @@ namespace P.HttpClient
 
     public class Sample
     {
-        private readonly IApiClient _api;
+        private readonly IDefaultApiHttpClient _api;
 
-        public Sample(IApiClient api)
+        public Sample(IDefaultApiHttpClient api)
         {
             _api = api;
         }

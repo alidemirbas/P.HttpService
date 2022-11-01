@@ -2,7 +2,7 @@
 
 namespace P.PHttpClient.TypedHttpClients.Concrete
 {
-    public class ApiClientConfiguration : ApiHttpClientConfiguration
+    public class DefaultApiHttpClientConfiguration : ApiHttpClientConfiguration
     {
         public ApiClientConfigurationRoutes Routes { get; set; }
     }

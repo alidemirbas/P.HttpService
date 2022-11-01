@@ -4,9 +4,9 @@ using P.PHttpClient.TypedHttpClients.Base;
 
 namespace P.PHttpClient.TypedHttpClients.Concrete
 {
-    public class ApiClient : ApiHttpClient, IApiClient
+    public class DefaultApiHttpClient : ApiHttpClient, IDefaultApiHttpClient
     {
-        public ApiClient(System.Net.Http.HttpClient client, IOptions<ApiClientConfiguration> configurationOptions)
+        public DefaultApiHttpClient(System.Net.Http.HttpClient client, IOptions<DefaultApiHttpClientConfiguration> configurationOptions)
             : base(client, configurationOptions.Value)
         {
 

@@ -2,21 +2,27 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using P.PHttpClient.TypedHttpClients.Base;
+using P.PHttpClient.TypedHttpClients.Concrete;
 
 namespace P.HttpClient
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddHttpClient<TClient, TImplementation, TApiHttpClientConfiguration>(this IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName = "HttpClientConfigurations")
+        public static IServiceCollection AddApiHttpClient<TClient, TImplementation, TApiHttpClientConfiguration>(this IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName = "HttpClientConfigurations")
             where TApiHttpClientConfiguration : ApiHttpClientConfiguration
             where TClient : class
-            where TImplementation : class, TClient
+            where TImplementation : ApiHttpClient, TClient
         {
             var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration, httpClientConfigurationsSectionName);
 
             services.AddHttpClient<TClient, TImplementation>();
 
             return services;
+        }
+
+        public static IServiceCollection AddDefaultApiHttpClient(this IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName = "HttpClientConfigurations")
+        {
+            return services.AddApiHttpClient<IDefaultApiHttpClient, DefaultApiHttpClient, DefaultApiHttpClientConfiguration>(configuration,httpClientConfigurationsSectionName);
         }
 
         private static T RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName)
