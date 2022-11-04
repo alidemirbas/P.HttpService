@@ -6,16 +6,16 @@ namespace P.HttpClient
     /*
     - add it to Program.cs
     
-    services.AddHttpClient<IApiClient, ApiClient, ApiClientConfiguration>(configuration);
+    services.AddHttpClient<IDefaultApiHttpClient, DefaultApiHttpClient, DefaultApiHttpClientConfiguration>(configuration);
     
     - and appsettings like
 
     "HttpClientConfigurations": {
-        "PLMApiClientConfiguration": {
+        "DefaultApiHttpClientConfiguration": {
           "BaseAddress": "https://foo.com",
           "ApiKey": "",
           "Routes": {
-            "GetFiles": "/pim/query/api/ProductImages/GetProductTeknikFoyImageByPlmCode"
+            "GetFooById": "/foo/getbyid/3"
           }
         }
     }

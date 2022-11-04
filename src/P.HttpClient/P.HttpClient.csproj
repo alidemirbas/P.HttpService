@@ -6,6 +6,7 @@
     <Title>P.HttpClient</Title>
     <RepositoryUrl>https://github.com/alidemirbas/P.HttpClient</RepositoryUrl>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
