@@ -13,7 +13,7 @@ namespace P.HttpClient
             where TClient : class
             where TImplementation : ApiHttpClient, TClient
         {
-            var clientConfiguration = RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration, httpClientConfigurationsSectionName);
+            RegisterClientConfiguration<TApiHttpClientConfiguration>(services, configuration, httpClientConfigurationsSectionName);
 
             services.AddHttpClient<TClient, TImplementation>();
 
@@ -25,17 +25,12 @@ namespace P.HttpClient
             return services.AddApiHttpClient<IDefaultApiHttpClient, DefaultApiHttpClient, DefaultApiHttpClientConfiguration>(configuration,httpClientConfigurationsSectionName);
         }
 
-        private static T RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName)
+        private static void RegisterClientConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpClientConfigurationsSectionName)
             where T : ApiHttpClientConfiguration
         {
             var configSection = $"{httpClientConfigurationsSectionName}:{typeof(T).Name}";
 
             services.Configure<T>(configuration.GetSection(configSection));
-
-            var serviceProvider = services.BuildServiceProvider();
-            var config = serviceProvider.GetRequiredService<IOptions<T>>();
-
-            return config.Value;
         }
     }
 }
