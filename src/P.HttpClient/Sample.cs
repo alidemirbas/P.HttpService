@@ -13,7 +13,6 @@ namespace P.HttpClient
     "HttpClientConfigurations": {
         "DefaultApiHttpClientConfiguration": {
           "BaseAddress": "https://foo.com",
-          "ApiKey": "",
           "Routes": {
             "GetFooById": "/foo/getbyid/3"
           }
