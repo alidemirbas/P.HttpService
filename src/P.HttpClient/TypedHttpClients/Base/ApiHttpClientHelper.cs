@@ -13,32 +13,12 @@ namespace P.HttpClient.TypedHttpClients.Base
 
         protected virtual void OnError(HttpStatusCode statusCode, string responseData, Action<ApiException> error = null)
         {
-            ResponseException exp = ResponseException;
-
-            if (!string.IsNullOrEmpty(responseData))
-            {
-                var deserializedExp = JsonConvert.DeserializeObject<ResponseException>(responseData);
-
-                if (!string.IsNullOrEmpty(deserializedExp.Message))
-                    exp = deserializedExp;
-            }
-
-            error?.Invoke(new ApiException(statusCode, exp));
+            error?.Invoke(new ApiException(statusCode, GetException(responseData)));
         }
 
         protected virtual ApiException OnError(HttpStatusCode statusCode, string responseData)
         {
-            ResponseException exp = ResponseException;
-
-            if (!string.IsNullOrEmpty(responseData))
-            {
-                var deserializedExp = JsonConvert.DeserializeObject<ResponseException>(responseData);
-
-                if (!string.IsNullOrEmpty(deserializedExp.Message))
-                    exp = deserializedExp;
-            }
-
-            return new ApiException(statusCode, exp);
+            return new ApiException(statusCode, GetException(responseData));
         }
 
         protected virtual void OnResponse<T>(HttpResponseMessage response, Action<T> success, Action<ApiException> error = null)
@@ -99,6 +79,31 @@ namespace P.HttpClient.TypedHttpClients.Base
             }
 
             throw OnError(response.StatusCode, responseData);
+        }
+
+        private ResponseException GetException(string responseData)
+        {
+            ResponseException rex = ResponseException;
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(responseData))
+                {
+                    var deserializedExp = JsonConvert.DeserializeObject<ResponseException>(responseData);
+
+                    if (!string.IsNullOrEmpty(deserializedExp.Message))
+                        rex = deserializedExp;
+                }
+
+                return rex;
+            }
+            catch (Exception ex)
+            {
+                rex = new ResponseException(ex);
+            }
+
+            return rex;
         }
     }
 }
