@@ -12,7 +12,7 @@ namespace P.PHttpClient.TypedHttpClients.Concrete
 
         }
 
-        public override Task PostAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
+        public override Task PostAsync(string urlPath, object data, Action success, Action<ApiException> error = null)
         {
             return base.PostAsync(urlPath, data, success, error);
         }

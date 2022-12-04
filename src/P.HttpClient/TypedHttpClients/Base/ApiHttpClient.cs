@@ -53,14 +53,14 @@ namespace P.PHttpClient.TypedHttpClients.Base
         }
 
         #region Delete
-        public virtual async Task DeleteAsync(string urlPath, Action success = null, Action<ApiException> error = null)
+        public virtual async Task DeleteAsync(string urlPath, Action success, Action<ApiException> error = null)
         {
             var response = await _client.DeleteAsync(urlPath);
 
             OnResponse(response, success, error);
         }
 
-        public virtual async Task DeleteAsync<T>(string urlPath, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task DeleteAsync<T>(string urlPath, Action<T> success, Action<ApiException> error = null)
         {
             var response = await _client.DeleteAsync(urlPath);
 
@@ -83,14 +83,14 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #endregion
 
         #region Get
-        public virtual async Task GetAsync(string urlPath, Action success = null, Action<ApiException> error = null)
+        public virtual async Task GetAsync(string urlPath, Action success, Action<ApiException> error = null)
         {
             var response = await _client.GetAsync(urlPath);
 
             OnResponse(response, success, error);
         }
 
-        public virtual async Task GetAsync<T>(string urlPath, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task GetAsync<T>(string urlPath, Action<T> success, Action<ApiException> error = null)
         {
             var response = await _client.GetAsync(urlPath);
 
@@ -113,7 +113,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #endregion
 
         #region Post
-        public virtual async Task PostAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
+        public virtual async Task PostAsync(string urlPath, object data, Action success, Action<ApiException> error = null)
         {
             HttpContent httpContent = default;
 
@@ -125,7 +125,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response, success, error);
         }
 
-        public virtual async Task PostAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task PostAsync<T>(string urlPath, object data, Action<T> success, Action<ApiException> error = null)
         {
             HttpContent httpContent = default;
 
@@ -163,7 +163,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
         #endregion
 
         #region Put
-        public virtual async Task PutAsync(string urlPath, object data, Action success = null, Action<ApiException> error = null)
+        public virtual async Task PutAsync(string urlPath, object data, Action success, Action<ApiException> error = null)
         {
             HttpContent httpContent = default;
 
@@ -175,7 +175,7 @@ namespace P.PHttpClient.TypedHttpClients.Base
             OnResponse(response, success, error);
         }
 
-        public virtual async Task PutAsync<T>(string urlPath, object data, Action<T> success = null, Action<ApiException> error = null)
+        public virtual async Task PutAsync<T>(string urlPath, object data, Action<T> success, Action<ApiException> error = null)
         {
             HttpContent httpContent = default;
 

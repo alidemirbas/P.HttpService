@@ -41,7 +41,7 @@ namespace P.HttpClient.TypedHttpClients.Base
             return new ApiException(statusCode, exp);
         }
 
-        protected virtual void OnResponse<T>(HttpResponseMessage response, Action<T> success = null, Action<ApiException> error = null)
+        protected virtual void OnResponse<T>(HttpResponseMessage response, Action<T> success, Action<ApiException> error = null)
         {
             var responseData = response.Content.ReadAsStringAsync().Result;
 
@@ -60,7 +60,7 @@ namespace P.HttpClient.TypedHttpClients.Base
             OnError(response.StatusCode, responseData, error);
         }
 
-        protected virtual void OnResponse(HttpResponseMessage response, Action success = null, Action<ApiException> error = null)
+        protected virtual void OnResponse(HttpResponseMessage response, Action success, Action<ApiException> error = null)
         {
             if (response.IsSuccessStatusCode)
             {
