@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>P.HttpService CodeSnippet</Title>
+      <Author>P</Author>
+      <Description>P</Description>
+      <Shortcut>apipost</Shortcut>
+    </Header>
+    <Snippet>
+      <!--<References>
+        <Reference>
+          <Assembly>P.HttpService.dll</Assembly>
+        </Reference>
+      </References>-->
+      <Imports>
+        <Import>
+			<Namespace>P.HttpService.TypedHttpClients.Concrete</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="CSharp">
+        <![CDATA[
+await _api.PostAsync(
+    urlPath:"",
+    data:new{},
+    success:()=>
+    {
+    //ok
+    },
+    error:(apiException)=>
+    {
+    }
+);
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
