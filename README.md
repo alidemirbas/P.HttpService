@@ -2,23 +2,23 @@ Do you like AJAX syntax?
 What about to do something like that in C# ?
 
 ```csharp
-services.AddHttpClient<IApiClient, ApiClient, ApiClientConfiguration>(configuration);
+services.AddDefaultHttpService(configuration);
 
 ...
 
 public class Sample
     {
-        private readonly IApiClient _api;
+        private readonly IDefaultHttpService _service;
 
-        public Sample(IApiClient api)
+        public Sample(IDefaultHttpService service)
         {
-            _api = api;
+            _service = service;
         }
 
         public async Task Foo()
         {
 
-            await _api.PostAsync<T>(
+            await _service.PostAsync<T>(
                 urlPath: "",
                 data: new { },
                 success: (t) =>
@@ -34,7 +34,7 @@ public class Sample
             OR classic
              */
 
-            var t = await _api.PostAsync<T>("", new { });
+            var t = await _service.PostAsync<T>("", new { });
         }
     }
 ```
