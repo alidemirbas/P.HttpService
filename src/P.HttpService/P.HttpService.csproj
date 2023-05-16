@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Title>P.HttpClient</Title>
+    <Title>P.HttpService</Title>
     <RepositoryUrl>https://github.com/alidemirbas/P.HttpClient</RepositoryUrl>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <Version>1.0.1</Version>
