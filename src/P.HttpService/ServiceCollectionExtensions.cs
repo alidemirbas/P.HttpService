@@ -5,7 +5,7 @@ using P.HttpService.TypedHttpClients.Concrete;
 
 namespace P.HttpService
 {
-    public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtensions
     {
         private const string HttpServiceConfigurationsSectionName = "HttpServiceConfigurations";
 

@@ -6,7 +6,9 @@
     <Title>P.HttpService</Title>
     <RepositoryUrl>https://github.com/alidemirbas/P.HttpClient</RepositoryUrl>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>D:\Dev\Local Nuget</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
