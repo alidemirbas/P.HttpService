@@ -2,7 +2,7 @@
 
 namespace P.HttpService.TypedHttpClients.Concrete
 {
-    public class DefaultHttpServiceConfiguration : HttpServiceConfiguration
+    public class JWTHttpServiceConfiguration : HttpServiceConfiguration
     {
         public Dictionary<string, string> Routes { get; set; }
     }

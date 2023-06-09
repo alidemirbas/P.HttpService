@@ -23,7 +23,7 @@ namespace P.HttpService
 
         public static IServiceCollection AddDefaultHttpService(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationsSectionName = HttpServiceConfigurationsSectionName)
         {
-            return services.AddHttpService<IDefaultHttpService, DefaultHttpService, DefaultHttpServiceConfiguration>(configuration, httpServiceConfigurationsSectionName);
+            return services.AddHttpService<IJWTHttpService, JWTHttpService, JWTHttpServiceConfiguration>(configuration, httpServiceConfigurationsSectionName);
         }
 
         private static void RegisterHttpServiceConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationsSectionName)

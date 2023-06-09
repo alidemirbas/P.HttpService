@@ -2,8 +2,6 @@
 {
     public interface IHttpService
     {
-        System.Net.Http.HttpClient HttpClient { get; }
-
-        void SetBearerToken(string token);
+        HttpClient HttpClient { get; }
     }
 }

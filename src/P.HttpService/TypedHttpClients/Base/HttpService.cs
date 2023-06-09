@@ -13,42 +13,16 @@ namespace P.HttpService.TypedHttpClients.Base
         IHttpServiceDelete,
         IDisposable
     {
-        public const string AuthorizationHeaderKey = "Authorization";
         public const string JSON = "application/json";
 
         public virtual HttpClient HttpClient { get; }
-
-        private string _token;
-        public string Token
-        {
-            get
-            {
-                return _token;
-            }
-            set
-            {
-                _token = value;
-
-                if (this.HttpClient.DefaultRequestHeaders.Contains(AuthorizationHeaderKey))
-                    this.HttpClient.DefaultRequestHeaders.Remove(AuthorizationHeaderKey);
-
-                if (!string.IsNullOrEmpty(_token))
-                    this.HttpClient.DefaultRequestHeaders.Add(AuthorizationHeaderKey, $"Bearer {_token}");
-            }
-        }
-
+        
         public HttpService(HttpClient httpClient, HttpServiceConfiguration clientConfiguration)
         {
             HttpClient = httpClient;
 
             HttpClient.BaseAddress = new Uri(clientConfiguration.BaseAddress);
             HttpClient.DefaultRequestHeaders.Accept.Clear();
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JSON));
-        }
-
-        public virtual void SetBearerToken(string token)
-        {
-            Token = token;
         }
 
         #region Delete

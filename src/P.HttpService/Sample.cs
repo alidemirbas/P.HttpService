@@ -1,4 +1,4 @@
-﻿using P.HttpService.TypedHttpClients.Concrete;
+﻿using P.HttpService.TypedHttpClients.Base;
 
 namespace P.HttpService
 {
@@ -22,9 +22,9 @@ namespace P.HttpService
 
     public class Sample
     {
-        private readonly IDefaultHttpService _service;
+        private readonly IJWTHttpService _service;
 
-        public Sample(IDefaultHttpService service)
+        public Sample(IJWTHttpService service)
         {
             _service = service;
         }
