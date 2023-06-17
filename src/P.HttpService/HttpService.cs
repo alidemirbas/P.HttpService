@@ -10,8 +10,7 @@ namespace P.HttpService
         IHttpServiceGet,
         IHttpServicePost,
         IHttpServicePut,
-        IHttpServiceDelete,
-        IDisposable
+        IHttpServiceDelete        
     {
         public const string JSON = "application/json";
 

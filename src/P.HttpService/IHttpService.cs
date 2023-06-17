@@ -1,6 +1,6 @@
 ﻿namespace P.HttpService
 {
-    public interface IHttpService
+    public interface IHttpService: IDisposable
     {
         HttpClient HttpClient { get; }
     }
