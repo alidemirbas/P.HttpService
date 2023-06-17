@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
-using P.HttpService.TypedHttpClients.Base;
-using P.HttpService.Utility;
 using System.Net.Http.Headers;
 
-namespace P.HttpService.TypedHttpClients.Concrete
+namespace P.HttpService.SS
 {
-    public class JWTHttpService : Base.HttpService, IJWTHttpService
+    public class HttpService : P.HttpService.HttpService, IHttpService
     {
         public const string AuthorizationHeaderKey = "Authorization";
 
@@ -28,7 +26,7 @@ namespace P.HttpService.TypedHttpClients.Concrete
             }
         }
 
-        public JWTHttpService(HttpClient httpClient, IOptions<JWTHttpServiceConfiguration> configurationOptions)
+        public HttpService(HttpClient httpClient, IOptions<HttpServiceConfiguration> configurationOptions)
             : base(httpClient, configurationOptions.Value)
         {
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JSON));

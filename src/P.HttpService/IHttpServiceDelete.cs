@@ -1,6 +1,6 @@
 ﻿using P.HttpService.Utility;
 
-namespace P.HttpService.TypedHttpClients.Base
+namespace P.HttpService
 {
     public interface IHttpServiceDelete : IHttpService
     {

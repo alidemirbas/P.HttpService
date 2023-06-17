@@ -3,7 +3,7 @@ using P.HttpService.Utility;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace P.HttpService.TypedHttpClients.Base
+namespace P.HttpService
 {
     public abstract class HttpService :
         HttpServiceHelper,
@@ -16,7 +16,7 @@ namespace P.HttpService.TypedHttpClients.Base
         public const string JSON = "application/json";
 
         public virtual HttpClient HttpClient { get; }
-        
+
         public HttpService(HttpClient httpClient, HttpServiceConfiguration clientConfiguration)
         {
             HttpClient = httpClient;

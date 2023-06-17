@@ -2,7 +2,7 @@
 using P.HttpService.Utility;
 using System.Net;
 
-namespace P.HttpService.TypedHttpClients.Base
+namespace P.HttpService
 {
     public abstract class HttpServiceHelper
     {

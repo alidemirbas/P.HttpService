@@ -1,4 +1,4 @@
-﻿namespace P.HttpService.TypedHttpClients.Base
+﻿namespace P.HttpService
 {
     public abstract class HttpServiceConfiguration
     {
