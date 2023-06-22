@@ -2,6 +2,6 @@
 {
     public class HttpServiceConfiguration : P.HttpService.HttpServiceConfiguration
     {
-        public Dictionary<string, string> DefaultRoutes { get; set; }
+        public Dictionary<string, string> Routes { get; set; }
     }
 }
