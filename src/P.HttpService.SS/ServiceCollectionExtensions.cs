@@ -7,7 +7,7 @@ namespace P.HttpService.SS
     {
         private const string PSSHttpServiceConfigurationsSectionName = "ssHttpServiceConfiguration";
 
-        public static IServiceCollection AddSSHttpService(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationsSectionName = PSSHttpServiceConfigurationsSectionName)
+        public static IServiceCollection AddHttpService(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationsSectionName = PSSHttpServiceConfigurationsSectionName)
         {
             return services.AddHttpService<IHttpService, HttpService, HttpServiceConfiguration>(configuration, httpServiceConfigurationsSectionName);
         }
