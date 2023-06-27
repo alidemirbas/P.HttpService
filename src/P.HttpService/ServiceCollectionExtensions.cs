@@ -7,8 +7,8 @@ namespace P.HttpService
     {
         public static IServiceCollection AddHttpService<THttpService, TImplementation, THttpServiceConfiguration>(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationSectionName)
             where THttpServiceConfiguration : HttpServiceConfiguration
-            where THttpService : class
-            where TImplementation : HttpService, THttpService
+            where THttpService : class, IHttpService
+            where TImplementation : HttpService<THttpServiceConfiguration>, THttpService
         {
             RegisterHttpServiceConfiguration<THttpServiceConfiguration>(services, configuration, httpServiceConfigurationSectionName);
 

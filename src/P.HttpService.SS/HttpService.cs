@@ -3,7 +3,8 @@ using System.Net.Http.Headers;
 
 namespace P.HttpService.SS
 {
-    public class HttpService : P.HttpService.HttpService, IHttpService
+    public class HttpService<TConfig> : P.HttpService.HttpService<TConfig>, IHttpService
+        where TConfig : HttpServiceConfiguration
     {
         public const string AuthorizationHeaderKey = "Authorization";
 
@@ -26,8 +27,8 @@ namespace P.HttpService.SS
             }
         }
 
-        public HttpService(HttpClient httpClient, IOptions<HttpServiceConfiguration> configurationOptions)
-            : base(httpClient, configurationOptions.Value)
+        public HttpService(HttpClient httpClient, IOptions<TConfig> configurationOptions)
+            : base(httpClient, configurationOptions)
         {
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JSON));
         }
@@ -35,6 +36,13 @@ namespace P.HttpService.SS
         public virtual void SetBearerToken(string token)
         {
             Token = token;
+        }
+    }
+
+    public class HttpService : HttpService<HttpServiceConfiguration>, IHttpService
+    {
+        public HttpService(HttpClient httpClient, IOptions<HttpServiceConfiguration> configurationOptions) : base(httpClient, configurationOptions)
+        {
         }
     }
 }

@@ -1,26 +1,28 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using P.HttpService.Utility;
 using System.Net.Http.Headers;
 using System.Text;
 
 namespace P.HttpService
 {
-    public abstract class HttpService :
+    public abstract class HttpService<Tconfig> :
         HttpServiceHelper,
         IHttpServiceGet,
         IHttpServicePost,
         IHttpServicePut,
-        IHttpServiceDelete        
+        IHttpServiceDelete  
+        where Tconfig : HttpServiceConfiguration
     {
         public const string JSON = "application/json";
 
         public virtual HttpClient HttpClient { get; }
 
-        public HttpService(HttpClient httpClient, HttpServiceConfiguration clientConfiguration)
+        public HttpService(HttpClient httpClient, IOptions<Tconfig> configurationOptions)
         {
             HttpClient = httpClient;
 
-            HttpClient.BaseAddress = new Uri(clientConfiguration.BaseAddress);
+            HttpClient.BaseAddress = new Uri(configurationOptions.Value.BaseAddress);
             HttpClient.DefaultRequestHeaders.Accept.Clear();
         }
 
