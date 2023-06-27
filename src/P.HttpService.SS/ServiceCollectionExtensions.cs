@@ -18,5 +18,11 @@ namespace P.HttpService.SS
         {
             return services.AddHttpService<IHttpService, T, TConfig>(configuration, httpServiceConfigurationSectionName);
         }
+
+        public static IServiceCollection AddHttpService<T>(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationSectionName)
+            where T : HttpService<HttpServiceConfiguration>
+        {
+            return services.AddHttpService<T, HttpServiceConfiguration>(configuration, httpServiceConfigurationSectionName);
+        }
     }
 }
