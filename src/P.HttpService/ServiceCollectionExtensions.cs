@@ -17,6 +17,17 @@ namespace P.HttpService
             return services;
         }
 
+        public static IServiceCollection AddHttpService<TImplementation, THttpServiceConfiguration>(this IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationSectionName)
+           where THttpServiceConfiguration : HttpServiceConfiguration
+           where TImplementation : HttpService<THttpServiceConfiguration>, IHttpService
+        {
+            RegisterHttpServiceConfiguration<THttpServiceConfiguration>(services, configuration, httpServiceConfigurationSectionName);
+
+            services.AddHttpClient<TImplementation>();
+
+            return services;
+        }
+
         private static void RegisterHttpServiceConfiguration<T>(IServiceCollection services, IConfiguration configuration, string httpServiceConfigurationSectionName)
             where T : HttpServiceConfiguration
         {
