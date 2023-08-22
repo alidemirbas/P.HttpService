@@ -2,6 +2,6 @@
 {
     public interface IHttpService: IDisposable
     {
-        HttpClient HttpClient { get; }
+        HttpClient HttpClient { get; set; }
     }
 }

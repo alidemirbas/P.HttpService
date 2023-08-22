@@ -16,7 +16,7 @@ namespace P.HttpService
     {
         public const string JSON = "application/json";
 
-        public virtual HttpClient HttpClient { get; }
+        public virtual HttpClient HttpClient { get; set; }
 
         public HttpService(HttpClient httpClient, IOptions<Tconfig> configurationOptions)
         {
