@@ -8,7 +8,7 @@
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <Version>1.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageOutputPath>D:\Dev\Local Nuget</PackageOutputPath>
+    <PackageOutputPath>D:\nuget</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
