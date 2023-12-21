@@ -17,12 +17,14 @@ namespace P.HttpService
         public const string JSON = "application/json";
 
         public virtual HttpClient HttpClient { get; set; }
+        public Tconfig Configuration{ get; set; }
 
         public HttpService(HttpClient httpClient, IOptions<Tconfig> configurationOptions)
         {
             HttpClient = httpClient;
+            Configuration = configurationOptions.Value;
 
-            HttpClient.BaseAddress = new Uri(configurationOptions.Value.BaseAddress);
+            HttpClient.BaseAddress = new Uri(Configuration.BaseAddress);
             HttpClient.DefaultRequestHeaders.Accept.Clear();
         }
 
