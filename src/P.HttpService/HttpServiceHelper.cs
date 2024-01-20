@@ -11,14 +11,14 @@ namespace P.HttpService
             Message = $"Empty Response Data",
         };
 
-        protected virtual void OnError(HttpStatusCode statusCode, string responseData, Action<ServiceException> error = null)
+        protected virtual void OnError(HttpStatusCode statusCode,string url, string responseData, Action<ServiceException> error = null)
         {
-            error?.Invoke(new ServiceException(statusCode, GetException(responseData)));
+            error?.Invoke(new ServiceException(statusCode,url, GetException(responseData)));
         }
 
-        protected virtual ServiceException OnError(HttpStatusCode statusCode, string responseData)
+        protected virtual ServiceException OnError(HttpStatusCode statusCode, string url, string responseData)
         {
-            return new ServiceException(statusCode, GetException(responseData));
+            return new ServiceException(statusCode,url, GetException(responseData));
         }
 
         protected virtual void OnResponse<T>(HttpResponseMessage response, Action<T> success, Action<ServiceException> error = null)
@@ -37,7 +37,7 @@ namespace P.HttpService
                 return;
             }
 
-            OnError(response.StatusCode, responseData, error);
+            OnError(response.StatusCode,response.RequestMessage.RequestUri.ToString(), responseData, error);
         }
 
         protected virtual void OnResponse(HttpResponseMessage response, Action success, Action<ServiceException> error = null)
@@ -51,7 +51,7 @@ namespace P.HttpService
 
             var responseData = response.Content.ReadAsStringAsync().Result;
 
-            OnError(response.StatusCode, responseData, error);
+            OnError(response.StatusCode, response.RequestMessage.RequestUri.ToString(), responseData, error);
         }
 
         protected virtual void OnResponse(HttpResponseMessage response)
@@ -61,7 +61,7 @@ namespace P.HttpService
 
             var responseData = response.Content.ReadAsStringAsync().Result;
 
-            throw OnError(response.StatusCode, responseData);
+            throw OnError(response.StatusCode, response.RequestMessage.RequestUri.ToString(), responseData);
         }
 
         protected virtual T OnResponse<T>(HttpResponseMessage response)
@@ -78,7 +78,7 @@ namespace P.HttpService
                 return t;
             }
 
-            throw OnError(response.StatusCode, responseData);
+            throw OnError(response.StatusCode, response.RequestMessage.RequestUri.ToString(), responseData);
         }
 
         private ResponseException GetException(string responseData)
