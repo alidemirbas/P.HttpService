@@ -8,10 +8,12 @@ namespace P.HttpService.Utility
             : base(ServiceError, remoteException)
         {
             HttpStatusCode = httpStatusCode;
+            Url = url;
         }
 
         private const string ServiceError = "Service Error";
 
         public HttpStatusCode HttpStatusCode { get; }
+        public string Url { get; }
     }
 }
