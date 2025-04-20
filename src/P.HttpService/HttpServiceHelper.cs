@@ -94,6 +94,11 @@ namespace P.HttpService
 
                     if (!string.IsNullOrEmpty(deserializedExp.Message))
                         rex = deserializedExp;
+                    else
+                        rex=new ResponseException
+                        {
+                            Message = $"Raw Response: {responseData}",
+                        };
                 }
 
                 return rex;
